@@ -5,55 +5,113 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Redirecionador de IAs</title>
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f2f5;
+            font-family: 'Segoe UI', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            padding: 20px;
         }
-        
+
         .container {
-            background-color: white;
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
             text-align: center;
-            width: 400px;
+            width: 100%;
+            max-width: 450px;
+            backdrop-filter: blur(5px);
         }
-        
+
         h1 {
-            color: #1a73e8;
-            margin-bottom: 30px;
+            color: #2c3e50;
+            margin-bottom: 35px;
+            font-size: 2.2em;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        
+
         .ia-list {
             display: flex;
             flex-direction: column;
-            gap: 15px;
+            gap: 20px;
         }
-        
+
         .ia-button {
-            padding: 12px 20px;
+            padding: 15px 25px;
             border: none;
-            border-radius: 5px;
-            background-color: #1a73e8;
+            border-radius: 50px;
+            background: linear-gradient(45deg, #1a73e8, #00ddeb);
             color: white;
-            font-size: 16px;
+            font-size: 1.1em;
+            font-weight: 600;
             cursor: pointer;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
-        
+
+        .ia-button::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            transform: translate(-50%, -50%);
+            transition: width 0.6s ease, height 0.6s ease;
+        }
+
+        .ia-button:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+
         .ia-button:hover {
-            background-color: #1557b0;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .ia-button:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+            
+            .ia-button {
+                font-size: 1em;
+                padding: 12px 20px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Escolha sua IA</h1>
+        <h1>Escolha sua IA para montar um treino</h1>
         <div class="ia-list">
             <button class="ia-button" onclick="redirectTo('grok')">Grok (xAI)</button>
             <button class="ia-button" onclick="redirectTo('chatgpt')">ChatGPT</button>
