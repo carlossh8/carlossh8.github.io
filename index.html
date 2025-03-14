@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirecionador de IAs</title>
+    <title>Atividade de Extensão</title>
     <style>
         * {
             margin: 0;
@@ -19,6 +19,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
+            gap: 30px;
         }
 
         .container {
@@ -32,6 +33,16 @@
             backdrop-filter: blur(5px);
         }
 
+        .prompt-section {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            width: 100%;
+            max-width: 400px;
+            backdrop-filter: blur(5px);
+        }
+
         h1 {
             color: #2c3e50;
             margin-bottom: 35px;
@@ -42,6 +53,13 @@
             background: linear-gradient(to right, #667eea, #764ba2);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+        }
+
+        h2 {
+            color: #2c3e50;
+            font-size: 1.5em;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
 
         .ia-list {
@@ -93,8 +111,58 @@
             transform: translateY(1px);
         }
 
+        .prompt-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            gap: 15px; /* Espaço entre o texto e o botão */
+        }
+
+        .prompt-text {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: left;
+            font-size: 0.95em;
+            color: #34495e;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+
+        .copy-button {
+            padding: 8px 15px;
+            border: none;
+            border-radius: 20px;
+            background: linear-gradient(45deg, #2ecc71, #27ae60);
+            color: white;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            align-self: flex-end; /* Alinha o botão à direita na parte inferior */
+        }
+
+        .copy-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .copy-button:active {
+            transform: translateY(1px);
+        }
+
+        @media (max-width: 768px) {
+            body {
+                flex-direction: column;
+            }
+            
+            .container, .prompt-section {
+                max-width: 100%;
+            }
+        }
+
         @media (max-width: 480px) {
-            .container {
+            .container, .prompt-section {
                 padding: 20px;
             }
             
@@ -102,21 +170,44 @@
                 font-size: 1.8em;
             }
             
+            h2 {
+                font-size: 1.3em;
+            }
+            
             .ia-button {
                 font-size: 1em;
                 padding: 12px 20px;
+            }
+            
+            .prompt-text {
+                font-size: 0.9em;
+            }
+            
+            .copy-button {
+                font-size: 0.8em;
+                padding: 6px 12px;
             }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Escolha sua IA para montar um treino</h1>
+        <h1>Escolha sua IA de treino</h1>
         <div class="ia-list">
             <button class="ia-button" onclick="redirectTo('grok')">Grok (xAI)</button>
             <button class="ia-button" onclick="redirectTo('chatgpt')">ChatGPT</button>
             <button class="ia-button" onclick="redirectTo('gemini')">Gemini</button>
             <button class="ia-button" onclick="redirectTo('claude')">Claude</button>
+        </div>
+    </div>
+
+    <div class="prompt-section">
+        <h2>Exemplo de Prompt</h2>
+        <div class="prompt-container">
+            <div class="prompt-text" id="prompt-text">
+Crie um plano de treino de academia para 5 dias por semana focado em hipertrofia, para um homem de 30 anos, 80kg, 1,75m, nível intermediário. Inclua exercícios, séries, repetições e tempo de descanso.
+            </div>
+            <button class="copy-button" onclick="copyPrompt()">Copiar</button>
         </div>
     </div>
 
@@ -138,6 +229,18 @@
                 default:
                     alert('IA não reconhecida!');
             }
+        }
+
+        function copyPrompt() {
+            const promptText = document.getElementById('prompt-text').innerText;
+            navigator.clipboard.writeText(promptText)
+                .then(() => {
+                    alert('Prompt copiado para a área de transferência!');
+                })
+                .catch(err => {
+                    console.error('Erro ao copiar: ', err);
+                    alert('Falha ao copiar o prompt. Tente novamente.');
+                });
         }
     </script>
 </body>
