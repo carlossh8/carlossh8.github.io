@@ -1,111 +1,86 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Página de Login</title>
+    <title>Redirecionador de IAs</title>
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
+            background-color: #f0f2f5;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
+            margin: 0;
         }
-        .login-container {
+        
+        .container {
             background-color: white;
-            padding: 40px;
+            padding: 30px;
             border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            width: 100%;
-            max-width: 400px;
-        }
-        h2 {
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
             text-align: center;
-            margin-bottom: 20px;
-            color: #333;
+            width: 400px;
         }
-        .form-group {
-            margin-bottom: 15px;
+        
+        h1 {
+            color: #1a73e8;
+            margin-bottom: 30px;
         }
-        label {
-            display: block;
-            margin-bottom: 5px;
-            color: #555;
+        
+        .ia-list {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
         }
-        input {
-            width: 100%;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 16px;
-        }
-        button {
-            width: 100%;
-            padding: 12px;
-            background-color: #007bff;
-            color: white;
+        
+        .ia-button {
+            padding: 12px 20px;
             border: none;
             border-radius: 5px;
+            background-color: #1a73e8;
+            color: white;
             font-size: 16px;
             cursor: pointer;
             transition: background-color 0.3s;
         }
-        button:hover {
-            background-color: #0056b3;
-        }
-        .message {
-            text-align: center;
-            margin-top: 15px;
-            color: #e74c3c;
-            display: none;
+        
+        .ia-button:hover {
+            background-color: #1557b0;
         }
     </style>
 </head>
 <body>
-    <div class="login-container">
-        <h2>Login</h2>
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="username">Usuário:</label>
-                <input type="text" id="username" name="username" placeholder="Digite seu usuário" required>
-            </div>
-            <div class="form-group">
-                <label for="password">Senha:</label>
-                <input type="password" id="password" name="password" placeholder="Digite sua senha" required>
-            </div>
-            <button type="submit">Entrar</button>
-        </form>
-        <p class="message" id="message">Usuário ou senha incorretos!</p>
+    <div class="container">
+        <h1>Escolha sua IA</h1>
+        <div class="ia-list">
+            <button class="ia-button" onclick="redirectTo('grok')">Grok (xAI)</button>
+            <button class="ia-button" onclick="redirectTo('chatgpt')">ChatGPT</button>
+            <button class="ia-button" onclick="redirectTo('gemini')">Gemini</button>
+            <button class="ia-button" onclick="redirectTo('claude')">Claude</button>
+        </div>
     </div>
 
     <script>
-        document.getElementById('loginForm').addEventListener('submit', function(event) {
-            event.preventDefault(); // Impede o envio padrão do formulário
-
-            // Valores fictícios para teste
-            const validUsername = "admin";
-            const validPassword = "1234";
-
-            // Pega os valores inseridos
-            const username = document.getElementById('username').value;
-            const password = document.getElementById('password').value;
-            const message = document.getElementById('message');
-
-            // Validação simples
-            if (username === validUsername && password === validPassword) {
-                alert('Login bem-sucedido! Bem-vindo, ' + username);
-                message.style.display = 'none';
-            } else {
-                message.style.display = 'block';
+        function redirectTo(ai) {
+            switch(ai) {
+                case 'grok':
+                    window.location.href = 'https://xai.com/grok';
+                    break;
+                case 'chatgpt':
+                    window.location.href = 'https://chat.openai.com/';
+                    break;
+                case 'gemini':
+                    window.location.href = 'https://gemini.google.com/';
+                    break;
+                case 'claude':
+                    window.location.href = 'https://anthropic.com/claude';
+                    break;
+                default:
+                    alert('IA não reconhecida!');
             }
-        });
+        }
     </script>
 </body>
 </html>
